@@ -1,4 +1,4 @@
-[![Coverage Status](https://coveralls.io/repos/github/jasoncalalang/1800f-test/badge.svg?branch=master)](https://coveralls.io/github/jasoncalalang/1800f-test?branch=master)
+[![Build Status](https://travis-ci.org/jasoncalalang/1800f-test.svg?branch=master)](https://travis-ci.org/jasoncalalang/1800f-test) [![Coverage Status](https://coveralls.io/repos/github/jasoncalalang/1800f-test/badge.svg?branch=master)](https://coveralls.io/github/jasoncalalang/1800f-test?branch=master)
 
 # 1800 Flowers Code Exercise
 
