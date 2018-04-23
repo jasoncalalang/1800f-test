@@ -19,15 +19,14 @@ public class TestSample {
     }
 
     @Test
+    public void testFetchShouldReturnListOfUsers() throws Exception {
+        Assert.assertNotNull(SampleUtil.fetch());
+        Assert.assertEquals(SampleUtil.fetch().size(), 100);
+    }
+
+    @Test
     public void testParseAndFilterDistinct() throws Exception {
-        ObjectMapper mapper = new ObjectMapper();
-
-        URL url = new URL("http://jsonplaceholder.typicode.com/posts");
-
-        List<User> users = mapper.readValue(url, new TypeReference<List<User>>(){});
-
-        int count = 0;
-        List<User> collect = users.stream()
+        List<User> collect = SampleUtil.fetch().stream()
                 .filter(SampleUtil.distinctByKey(user->user.getUserId()))
                 .collect(Collectors.toList());
 

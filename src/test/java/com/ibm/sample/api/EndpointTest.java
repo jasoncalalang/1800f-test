@@ -21,7 +21,10 @@ import java.net.URL;
 import java.nio.charset.Charset;
 import java.util.List;
 
+import static org.hamcrest.core.Is.is;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @RunWith(SpringRunner.class)
@@ -44,15 +47,29 @@ public class EndpointTest {
 
     @Test
     public void countTestShouldReturnAnArray() throws Exception {
+        mockMvc.perform(get("/count").contentType(APPLICATION_JSON_UTF8))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.count", is(10)));
+
+    }
+
+    @Test
+    public void updateTestShouldReturnAnArray() throws Exception {
         ObjectMapper mapper = new ObjectMapper();
         mapper.configure(SerializationFeature.WRAP_ROOT_VALUE, false);
         URL url = new URL("http://jsonplaceholder.typicode.com/posts");
         List<User> users = mapper.readValue(url, new TypeReference<List<User>>(){});
+        User fourthUser = users.get(4);
+        fourthUser.setTitle("1800Flowers");
+        fourthUser.setBody("1800Flowers");
+//        users.set(4, fourthUser);
         ObjectWriter ow = mapper.writer().withDefaultPrettyPrinter();
-        String requestJson=ow.writeValueAsString(users);
+        String requestJson=ow.writeValueAsString(fourthUser);
 
-        mockMvc.perform(get("/count/").contentType(APPLICATION_JSON_UTF8)
+        mockMvc.perform(put("/update/4").contentType(APPLICATION_JSON_UTF8)
                 .content(requestJson))
-                .andExpect(status().isOk());
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.count", is(10)));
+
     }
 }
