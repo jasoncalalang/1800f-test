@@ -4,3 +4,6 @@ jdk: oraclejdk8
 script:
 - ./mvnw clean install -B
 - ./mvnw test
+
+after_success:
+  - mvn clean test jacoco:report coveralls:report
