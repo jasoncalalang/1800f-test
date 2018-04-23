@@ -57,19 +57,17 @@ public class EndpointTest {
     public void updateTestShouldReturnAnArray() throws Exception {
         ObjectMapper mapper = new ObjectMapper();
         mapper.configure(SerializationFeature.WRAP_ROOT_VALUE, false);
-        URL url = new URL("http://jsonplaceholder.typicode.com/posts");
-        List<User> users = mapper.readValue(url, new TypeReference<List<User>>(){});
-        User fourthUser = users.get(4);
+        User fourthUser = new User();
         fourthUser.setTitle("1800Flowers");
         fourthUser.setBody("1800Flowers");
-//        users.set(4, fourthUser);
         ObjectWriter ow = mapper.writer().withDefaultPrettyPrinter();
         String requestJson=ow.writeValueAsString(fourthUser);
 
-        mockMvc.perform(put("/update/4").contentType(APPLICATION_JSON_UTF8)
+        mockMvc.perform(put("/update/3").contentType(APPLICATION_JSON_UTF8)
                 .content(requestJson))
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$.count", is(10)));
+                .andExpect(jsonPath("$[3].title", is("1800Flowers")))
+                .andExpect(jsonPath("$[3].body", is("1800Flowers")));
 
     }
 }
