@@ -1,0 +1,17 @@
+ apiVersion: extensions/v1beta1
+ kind: Ingress
+ metadata:
+   name: ingress-dev
+ spec:
+   tls:
+   - hosts:
+     - dev.alex-testcluster.us-south.containers.appdomain.cloud
+     secretName: alex-testcluster
+   rules:
+   - host: dev.alex-testcluster.us-south.containers.appdomain.cloud
+     http:
+       paths:
+       - path: /count
+         backend:
+           serviceName: sample-app-dev
+           servicePort: 8080

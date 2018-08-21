@@ -1,0 +1,17 @@
+ apiVersion: extensions/v1beta1
+ kind: Ingress
+ metadata:
+   name: ingress-uat
+ spec:
+   tls:
+   - hosts:
+     - uat.alex-testcluster.us-south.containers.appdomain.cloud
+     secretName: alex-testcluster
+   rules:
+   - host: uat.alex-testcluster.us-south.containers.appdomain.cloud
+     http:
+       paths:
+       - path: /count
+         backend:
+           serviceName: sample-app-uat
+           servicePort: 8080
