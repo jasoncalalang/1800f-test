@@ -3,6 +3,7 @@ package com.ibm.sample.controller;
 import com.ibm.sample.model.ResponseCount;
 import com.ibm.sample.model.User;
 import com.ibm.sample.util.SampleUtil;
+import io.swagger.annotations.Api;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
@@ -11,6 +12,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @RestController
+@Api(tags = "sample")
 public class SampleController {
 
     @RequestMapping(value = "/count", method = RequestMethod.GET, consumes = {
