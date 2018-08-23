@@ -11,7 +11,7 @@
    - host: dev.alex-testcluster.us-south.containers.appdomain.cloud
      http:
        paths:
-       - path: /count
+       - path: /
          backend:
            serviceName: sample-app-dev
            servicePort: 8080
