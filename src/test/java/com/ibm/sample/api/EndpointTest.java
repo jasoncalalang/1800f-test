@@ -22,6 +22,7 @@ import java.nio.charset.Charset;
 import java.util.List;
 
 import static org.hamcrest.core.Is.is;
+import static org.hamcrest.core.Is.isA;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
@@ -49,7 +50,7 @@ public class EndpointTest {
     public void countTestShouldReturnAnArray() throws Exception {
         mockMvc.perform(get("/count").contentType(APPLICATION_JSON_UTF8))
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$.count", is(10)));
+                .andExpect(jsonPath("$.count", isA(Integer.class)));
 
     }
 
